@@ -1,5 +1,5 @@
 import { errors } from "@/errors/errors";
-import { CreateUser } from "@/protocols/usersProtocol";
+import { CreateUser, UpdateUser } from "@/protocols/usersProtocol";
 import { usersRepository } from "@/repositories/usersRepository"
 
 async function getUsers() {
@@ -10,11 +10,17 @@ async function getUsers() {
 async function createUser(user: CreateUser) {
     const check = await usersRepository.checkEmail(user.email);
     if(check.length !== 0) throw errors.conflictError("Email")
-    const res = await usersRepository.createUser(user);
-    return res;
+    await usersRepository.createUser(user);
+    return;
+}
+
+async function updateUser(user: UpdateUser) {
+    await usersRepository.updateUser(user);
+    return;
 }
 
 export const usersService  = {
     getUsers,
-    createUser
+    createUser,
+    updateUser
 }

@@ -1,3 +1,5 @@
+import { type } from "os";
+
 export type User = {
     id: number;
     name: string;
@@ -5,3 +7,5 @@ export type User = {
 }
 
 export type CreateUser = Omit<User, "id"> 
+
+export type UpdateUser = Omit<User, "email">

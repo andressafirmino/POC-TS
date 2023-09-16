@@ -1,4 +1,4 @@
-import { CreateUser, User } from "@/protocols/usersProtocol";
+import { CreateUser, UpdateUser, User } from "@/protocols/usersProtocol";
 import { usersService } from "@/services/usersService";
 import { Request, Response } from "express";
 import httpStatus from "http-status";
@@ -15,7 +15,14 @@ async function createUser(req: Request, res: Response) {
     res.sendStatus(httpStatus.CREATED);
 }
 
+async function updateUser(req: Request, res: Response) {
+    const user = req.body as UpdateUser;
+    await usersService.updateUser(user);
+    res.sendStatus(httpStatus.OK);
+}
+
 export const usersController  = {
     getUsers,
-    createUser
+    createUser,
+    updateUser
 }
