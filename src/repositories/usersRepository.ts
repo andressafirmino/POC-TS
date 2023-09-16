@@ -29,10 +29,19 @@ async function updateUser(user: UpdateUser) {
     return res;
 }
 
+async function deleteUser(id: number) {
+    console.log(id)
+    const res = await db.query(`
+        DELETE FROM users WHERE id = $1;
+    `, [id]);
+    return res;
+}
+
 export const usersRepository  = {
     getUsers,
     checkEmail,
     createUser,
-    updateUser
+    updateUser,
+    deleteUser
 }
 

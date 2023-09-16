@@ -10,3 +10,7 @@ export const updateUserSchema = joi.object<UpdateUser>({
     id: joi.number().positive().integer().required(),
     name: joi.string().min(1).required()
 })
+
+export const deleteUserSchema = joi.object({
+    id: joi.number().positive().integer().required()
+})
